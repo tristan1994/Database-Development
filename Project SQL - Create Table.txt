@@ -1,0 +1,308 @@
+-- Chapter 2 HW
+
+/* Drop tables for multiple runs in backward order
+DROP TABLE Test;
+DROP SEQUENCE Test_seq;
+DROP TABLE Appoinment;
+DROP SEQUENCE Appoinment_seq;
+DROP TABLE Patient;
+DROP SEQUENCE Patient_seq;
+DROP TABLE Nurse;
+DROP SEQUENCE Nurse_seq;
+DROP TABLE Doctor;
+DROP SEQUENCE Doctor_seq; */
+
+
+-- Create table Doctor
+CREATE TABLE Doctor
+(doctor_id NUMBER(4),
+first_name VARCHAR2(45),
+last_name VARCHAR2(45),
+date_of_birth VARCHAR2(45),
+street VARCHAR2(50),
+city VARCHAR2(20),
+state VARCHAR2(20),
+zip_code NUMBER(5),
+phone VARCHAR2(15),
+specialty VARCHAR(45),
+CONSTRAINT Doctor_doctor_id_pk PRIMARY KEY (doctor_id));
+
+-- CREATE the sequence for Doctor table
+CREATE SEQUENCE Doctor_seq
+START WITH 1
+INCREMENT BY 1;
+
+-- Create table Nurse
+CREATE TABLE Nurse
+(nurse_id NUMBER(4),
+first_name VARCHAR2(45),
+last_name VARCHAR2(45),
+date_of_birth VARCHAR2(45),
+street VARCHAR2(50),
+city VARCHAR2(20),
+state VARCHAR2(20),
+zip_code NUMBER(5),
+phone VARCHAR2(15),
+specialty VARCHAR(45),
+CONSTRAINT Nurse_nurse_id_pk PRIMARY KEY (nurse_id));
+
+-- Create Sequence for Nurse
+CREATE SEQUENCE Nurse_seq
+START WITH 1
+INCREMENT BY 1;
+
+-- Create table Patient
+CREATE TABLE Patient
+(patient_id NUMBER(4),
+first_name VARCHAR2(45),
+last_name VARCHAR2(45),
+date_of_birth VARCHAR2(45),
+street VARCHAR2(50),
+city VARCHAR2(20),
+state VARCHAR2(20),
+zip_code NUMBER(5),
+phone VARCHAR2(15),
+CONSTRAINT Patient_patient_id_pk PRIMARY KEY (patient_id));
+
+
+-- Create Sequence for Patient
+CREATE SEQUENCE Patient_seq
+START WITH 1
+INCREMENT BY 1;
+
+-- Create table Appoinment
+CREATE TABLE Appoinment
+(appoinment_id NUMBER(4),
+date_of_appoint VARCHAR2(50),
+time_of_appoint VARCHAR2(15),
+reason VARCHAR2(100),
+patient_id NUMBER(4),
+doctor_id NUMBER(4),
+nurse_id NUMBER(4),
+CONSTRAINT Appoinment_appoinment_id_pk Primary Key (appoinment_id),
+CONSTRAINT Appoinment_patient_id_fk Foreign Key (patient_id)
+REFERENCES Patient(patient_id),
+CONSTRAINT Appoinment_doctor_id_fk Foreign Key (doctor_id)
+REFERENCES Doctor(doctor_id),
+CONSTRAINT Appoinment_nurse_id_fk Foreign Key (nurse_id)
+REFERENCES Nurse(nurse_id));
+
+-- Create Sequence for Appoinment
+CREATE SEQUENCE Appoinment_seq
+START WITH 1
+INCREMENT BY 1;
+
+-- Create table Test
+CREATE TABLE Test(
+test_id NUMBER(4),
+subject VARCHAR2(45),
+test_result VARCHAR2(45),
+patient_id NUMBER(4),
+doctor_id NUMBER(4),
+nurse_id NUMBER(4),
+CONSTRAINT Test_test_id_pk Primary Key (test_id),
+CONSTRAINT Test_patient_id_fk Foreign Key (patient_id)
+REFERENCES Patient(patient_id),
+CONSTRAINT Test_doctor_id_fk Foreign Key (doctor_id)
+REFERENCES Doctor(doctor_id),
+CONSTRAINT Test_nurse_id_fk Foreign Key (nurse_id)
+REFERENCES Nurse(nurse_id));
+
+-- Create Sequence for Test
+CREATE SEQUENCE Test_seq
+START WITH 1
+INCREMENT BY 1;
+
+-- Insert data into Doctor
+INSERT INTO Doctor (doctor_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Doctor_seq.NEXTVAL, 'Timothy', 'Thompson', 'August 24, 1953', '1680 Grey Fox Road', 'Atlanta', 'GA', '30324', '404-763-6414', 'Surgeon'); 
+INSERT INTO Doctor (doctor_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Doctor_seq.NEXTVAL, 'Stephanie', 'Rivera', 'June 12, 1970', '804 NW Saxton St', 'Alpharetta', 'GA', '30009', '678-232-0923', 'Pediatrician'); 
+INSERT INTO Doctor (doctor_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Doctor_seq.NEXTVAL, 'Donna', 'Price', 'April 2, 1964', '9950 Old Anderson Ave' , 'Marietta', 'GA', '30007', '404-942-1356', 'Radiologist'); 
+INSERT INTO Doctor (doctor_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Doctor_seq.NEXTVAL, 'Patrick','Gonzales', 'March 29, 1959', '366 East Broad Drive', 'Atlanta' ,'GA', '30326', '404-592-3212', 'Pathologists'); 
+INSERT INTO Doctor (doctor_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Doctor_seq.NEXTVAL, 'Brandon', 'James', 'January 18, 1960', '256 South Oak Ave', 'Lawrenceville', 'GA', '30044', '678-325-3295', 'Dermatologist'); 
+INSERT INTO Doctor (doctor_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Doctor_seq.NEXTVAL, 'Cynthia', 'Flores', 'October 10, 1975', '190 Purple Finch St', 'Atlanta', 'GA', '30308', '404-582-3935', 'Physician'); 
+INSERT INTO Doctor (doctor_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Doctor_seq.NEXTVAL, 'Tristan', 'Nguyen', 'December 15, 1964', '30 Elmwood St', 'Marietta', 'GA', '30008', '678-395-1932', 'Anesthesiologists'); 
+INSERT INTO Doctor (doctor_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Doctor_seq.NEXTVAL, 'Kevin', 'Singed', 'July 5, 1962', '7461 Lakewood St', 'Atlanta', 'GA', '30315', '678-032-0421', 'Cardiologist'); 
+INSERT INTO Doctor (doctor_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Doctor_seq.NEXTVAL, 'Wayne', 'Bruce', 'May 2, 1975', '813 Kent Ave', 'Alpharetta', 'GA', '30009', '404-321-0425', 'Physician'); 
+INSERT INTO Doctor (doctor_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Doctor_seq.NEXTVAL, 'Ralph', 'Garcia', 'November 16, 1969', '643 Gregory St', 'Lawrenceville', 'GA', '30044', '678-254-5409', 'Surgeon'); 
+INSERT INTO Doctor (doctor_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Doctor_seq.NEXTVAL, 'Joseph', 'Evans', 'October 27, 1972', '772 Riverview Court', 'Atlanta', 'GA', '30320', '678-124-0923', 'Gastroenterologists'); 
+INSERT INTO Doctor (doctor_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Doctor_seq.NEXTVAL, 'Ruby', 'Miller', 'April 24, 1977', '9437 Blackburn Ave', 'Johns Creek', 'GA', '30022', '404-902-2319', 'Physician'); 
+INSERT INTO Doctor (doctor_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Doctor_seq.NEXTVAL, 'Angela', 'Ramirez', 'January 6, 1968', '7220 Myrtle Court', 'Alpharetta', 'GA', '30009', '678-454-9256', 'Urologist'); 
+INSERT INTO Doctor (doctor_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Doctor_seq.NEXTVAL, 'Jane', 'Torres', 'November 19, 1959', '936 Addison Rd', 'Atlanta', 'GA', '30326', '678-214-5023', 'Radiologist'); 
+INSERT INTO Doctor (doctor_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Doctor_seq.NEXTVAL, 'Robert', 'Gray', 'June 21, 1962', '430 Center Dr', 'Atlanta', 'GA', '30315', '678-325-2302', 'Physiatrist'); 
+INSERT INTO Doctor (doctor_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Doctor_seq.NEXTVAL, 'James', 'Morris', 'May 2, 1972', '237 South Wood Ave', 'Alpharetta', 'GA', '30009', '678-011-0425', 'Physician'); 
+INSERT INTO Doctor (doctor_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Doctor_seq.NEXTVAL, 'Elise', 'Tran', 'May 2, 1977', '237 South Wood Ave', 'Atlanta', 'GA', '30340', '678-011-0425', 'Physician'); 
+
+-- Insert Values Into Nurse
+INSERT INTO Nurse (nurse_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Nurse_seq.NEXTVAL, 'Helen', 'Cox', 'December 19, 1987', '932 North Dogwood', 'Norcross', 'GA', '30097', '404-232-3214', 'General'); 
+INSERT INTO Nurse (nurse_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Nurse_seq.NEXTVAL, 'Maya', 'Moore', 'November 30, 1992', '3214 Whitemarsh St', 'Atlanta', 'GA', '30340', '404-932-2435', 'ER'); 
+INSERT INTO Nurse (nurse_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Nurse_seq.NEXTVAL, 'Michael', 'Morris', 'May 21, 1991', '244 West South Dr', 'Atlanta', 'GA', '30329', '404-983-5973', 'General'); 
+INSERT INTO Nurse (nurse_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Nurse_seq.NEXTVAL, 'Stephanie', 'Tran', 'March 10, 1979', '302 Pendergast Rd', 'Alpharetta', 'GA', '30009', '678-230-6735', 'Anesthetist'); 
+INSERT INTO Nurse (nurse_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Nurse_seq.NEXTVAL, 'Janet', 'Harris', 'August 09, 1982', '502 Wentworth Ave', 'Johns Creek', 'GA', '30022', '678-402-2495', 'General'); 
+INSERT INTO Nurse (nurse_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Nurse_seq.NEXTVAL, 'Andrea', 'Bell', 'February 11, 1984', '8804 Berkshire St', 'Atlanta', 'GA', '30215', '404-203-5842', 'Practitioner'); 
+INSERT INTO Nurse (nurse_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Nurse_seq.NEXTVAL, 'Anna', 'Wright', 'April 23, 1979', '47 East Hilltop St', 'Norcross', 'GA', '30097', '678-850-2593', 'General'); 
+INSERT INTO Nurse (nurse_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Nurse_seq.NEXTVAL, 'Mellisa', 'Roger', 'October 17, 1990', '3510 East Addison Ave', 'Atlanta', 'GA', '30340', '404-503-2593', 'General'); 
+INSERT INTO Nurse (nurse_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Nurse_seq.NEXTVAL, 'Sara', 'White', 'June 9, 1994', '230 Jennings Dr', 'Alpharetta', 'GA', '30009', '678-320-9427', 'ER'); 
+INSERT INTO Nurse (nurse_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Nurse_seq.NEXTVAL, 'Randy', 'Green', 'July 18, 1983', '933 Hamilton St', 'Atlanta', 'GA', '30319', '404-952-2934', 'General'); 
+INSERT INTO Nurse (nurse_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Nurse_seq.NEXTVAL, 'Jose', 'Jackson', 'November 21, 1987', '203 Golf Dr', 'Atlanta', 'GA', '30023', '678-942-5834', 'General'); 
+INSERT INTO Nurse (nurse_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Nurse_seq.NEXTVAL, 'Cynthia', 'Wood', 'September 9, 1976', '429 Border St', 'Atlanta', 'GA', '30327', '404-203-6945', 'General'); 
+INSERT INTO Nurse (nurse_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Nurse_seq.NEXTVAL, 'Terry', 'Gonzales', 'January 22, 1984', '70 Lafayette Ave,', 'Peachtree Corners', 'GA', '30329', '404-302-6452', 'ER'); 
+INSERT INTO Nurse (nurse_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Nurse_seq.NEXTVAL, 'Kathryn', 'Sanders', 'September 16, 1987', '402 Saxon St', 'Mcdonough', 'GA', '30252', '678-942-4364', 'General'); 
+INSERT INTO Nurse (nurse_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone, specialty)
+    VALUES (Nurse_seq.NEXTVAL, 'Christina', 'Thompson', 'October 22, 1981', '302 Van Dyke Ave', 'Atlanta', 'GA', '30318', '678-537-2934', 'Registered'); 
+
+-- Insert Value Into Patient
+INSERT INTO Patient (patient_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone)
+    VALUES (Patient_seq.NEXTVAL, 'Jason', 'Momoa', 'April 18, 1972', '534 Colonial St', 'Atlanta', 'GA', '30336', '404-023-5731'); 
+INSERT INTO Patient (patient_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone)
+    VALUES (Patient_seq.NEXTVAL, 'Emily', 'Rivera', 'May 7, 1999', '8325 Marsh Ave', 'Norcross', 'GA', '30096', '678-245-3432'); 
+INSERT INTO Patient (patient_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone)
+    VALUES (Patient_seq.NEXTVAL, 'Ryan', 'Howard', 'September 23, 1986', '566 Bohemia Rd', 'Atlanta', 'GA', '30333', '678-343-9682'); 
+INSERT INTO Patient (patient_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone)
+    VALUES (Patient_seq.NEXTVAL, 'Julia', ' Smith', 'February 28, 1990', '291 Beacon Ave', 'Atlanta', 'GA', '30340', '678-430-2032');
+INSERT INTO Patient (patient_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone)
+    VALUES (Patient_seq.NEXTVAL, 'Phyllis', 'Rogers', 'July 17, 1999', '270 Wild Horse', 'Atlanta', 'GA', '30019', '404-503-3051'); 
+INSERT INTO Patient (patient_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone)
+    VALUES (Patient_seq.NEXTVAL, 'Betty', 'James', 'October 11, 1975', '320 Myers Rd', 'Alpharetta', 'GA', '30009', '678-591-5832'); 
+INSERT INTO Patient (patient_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone)
+    VALUES (Patient_seq.NEXTVAL, 'Teresa', 'Martin', 'August 25, 1982', '889 East Hill Dr', 'Atlanta', 'GA', '30318', '678-023-2941'); 
+INSERT INTO Patient (patient_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone)
+    VALUES (Patient_seq.NEXTVAL, 'Sara', 'Morgan', 'May 9, 1971', '410 Circle Rd', 'Lawrenceville', 'GA', '30022', '404-830-1023'); 
+INSERT INTO Patient (patient_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone) 
+    VALUES (Patient_seq.NEXTVAL, 'Jennifer', 'Hill', 'March 3, 2000', '209 Gainsway Ave', 'Marietta', 'GA', '30007', '678-239-3293'); 
+INSERT INTO Patient (patient_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone)
+    VALUES (Patient_seq.NEXTVAL, 'Dean', 'Griffin', 'March 19, 1984', '302 Oakcliff Rd', 'Atlanta', 'GA', '30340', '678-695-3921'); 
+INSERT INTO Patient (patient_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone)
+    VALUES (Patient_seq.NEXTVAL, 'Steven', 'Murphy', 'December 23, 1997', '683 Royston Dr', 'Duluth', 'GA', '30097', '678-391-6573'); 
+INSERT INTO Patient (patient_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone) 
+    VALUES (Patient_seq.NEXTVAL, 'Luke', 'Walker', 'March 3, 1962', '209 Gray Wolf Ave', 'Marietta', 'GA', '30007', '678-209-3652'); 
+INSERT INTO Patient (patient_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone)
+    VALUES (Patient_seq.NEXTVAL, 'Samual', 'Winster', 'March 19, 1984', '492 Windway', 'Atlanta', 'GA', '30320', '678-164-4321'); 
+INSERT INTO Patient (patient_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone)
+    VALUES (Patient_seq.NEXTVAL, 'Steven', 'Jayce', 'December 23, 1977', '6941 Ember Dr', 'Atlanta', 'GA', '30317', '404-329-2156');  
+INSERT INTO Patient (patient_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone)
+    VALUES (Patient_seq.NEXTVAL, 'Darius', 'Beckhamn', 'December 23, 1977', '5486 Fire Bird', 'Doraville', 'GA', '30340', '678-841-9753');  	
+INSERT INTO Patient (patient_id, first_name, last_name, date_of_birth, street, city, state, zip_code, phone)
+    VALUES (Patient_seq.NEXTVAL, 'Draven', 'Walker', 'April 4, 1969', '7856 Third St', 'Johns Creek', 'GA', '30022', '404-924-5841');     
+   
+   
+   
+   
+-- Insert Value into Appoinment
+INSERT INTO Appoinment (appoinment_id, date_of_appoint, time_of_appoint, reason, patient_id, doctor_id, nurse_id)
+    VALUES (Appoinment_seq.NEXTVAL, 'September 4, 2019', '9:00 AM', 'Back Pain', '1', '6', '1');
+INSERT INTO Appoinment (appoinment_id, date_of_appoint, time_of_appoint, reason, patient_id, doctor_id, nurse_id)
+    VALUES (Appoinment_seq.NEXTVAL, 'September 4, 2019', '9:15 AM', 'Headache', '5', '9', '10'); 
+INSERT INTO Appoinment (appoinment_id, date_of_appoint, time_of_appoint, reason, patient_id, doctor_id, nurse_id)
+    VALUES (Appoinment_seq.NEXTVAL, 'September 4, 2019', '11:00 AM', 'Hurt when urine', '3', '13', '15'); 
+INSERT INTO Appoinment (appoinment_id, date_of_appoint, time_of_appoint, reason, patient_id, doctor_id, nurse_id)
+    VALUES (Appoinment_seq.NEXTVAL, 'September 4, 2019', '11:30 AM', 'Check Up', '9', '12', '7'); 
+INSERT INTO Appoinment (appoinment_id, date_of_appoint, time_of_appoint, reason, patient_id, doctor_id, nurse_id)
+    VALUES (Appoinment_seq.NEXTVAL, 'September 4, 2019', '12:00 PM', 'Leg Injured', '11', '16', '12'); 
+INSERT INTO Appoinment (appoinment_id, date_of_appoint, time_of_appoint, reason, patient_id, doctor_id, nurse_id)
+    VALUES (Appoinment_seq.NEXTVAL, 'September 4, 2019', '1:00 PM', 'Constipation', '4', '11', '');
+INSERT INTO Appoinment (appoinment_id, date_of_appoint, time_of_appoint, reason, patient_id, doctor_id, nurse_id)
+    VALUES (Appoinment_seq.NEXTVAL, 'September 4, 2019', '1:20 PM', 'Heart Burn', '2', '3', '8'); 
+INSERT INTO Appoinment (appoinment_id, date_of_appoint, time_of_appoint, reason, patient_id, doctor_id, nurse_id)
+    VALUES (Appoinment_seq.NEXTVAL, 'September 5, 2019', '9:00 AM', 'Skin Rash', '12', '5', '14'); 
+INSERT INTO Appoinment (appoinment_id, date_of_appoint, time_of_appoint, reason, patient_id, doctor_id, nurse_id)
+    VALUES (Appoinment_seq.NEXTVAL, 'September 5, 2019', '11:15 AM', 'Leg Muscle Pain', '6', '15', '13'); 
+INSERT INTO Appoinment (appoinment_id, date_of_appoint, time_of_appoint, reason, patient_id, doctor_id, nurse_id)
+    VALUES (Appoinment_seq.NEXTVAL, 'September 5, 2019', '2:00 PM', 'Often Tired', '14', '12', '6');  
+INSERT INTO Appoinment (appoinment_id, date_of_appoint, time_of_appoint, reason, patient_id, doctor_id, nurse_id)
+    VALUES (Appoinment_seq.NEXTVAL, 'September 10, 2019', '9:00 AM', 'Check Up', '1', '6', '1'); 
+INSERT INTO Appoinment (appoinment_id, date_of_appoint, time_of_appoint, reason, patient_id, doctor_id, nurse_id)
+    VALUES (Appoinment_seq.NEXTVAL, 'October 10, 2019', '2:00 PM', 'Diagnose', '14', '4', '5');   
+
+
+-- Insert Values into Test
+INSERT INTO Test (test_id, subject, test_result, patient_id, doctor_id, nurse_id)
+    VALUES (Test_seq.NEXTVAL, 'Back Pain', 'Lack of Vitamin D', '1', '6', '1');
+INSERT INTO Test (test_id, subject, test_result, patient_id, doctor_id, nurse_id)
+    VALUES (Test_seq.NEXTVAL, 'Headache', 'Clear', '5', '9', '10');
+INSERT INTO Test (test_id, subject, test_result, patient_id, doctor_id, nurse_id)
+    VALUES (Test_seq.NEXTVAL, 'Problem with Urine', 'Prostatitis', '3', '13', '15');
+INSERT INTO Test (test_id, subject, test_result, patient_id, doctor_id, nurse_id)
+    VALUES (Test_seq.NEXTVAL, 'CT', 'Clear', '9', '12', '7');
+INSERT INTO Test (test_id, subject, test_result, patient_id, doctor_id, nurse_id)
+    VALUES (Test_seq.NEXTVAL, 'Leg Injured', 'Minor Internal Injure', '11', '16', '12');
+INSERT INTO Test (test_id, subject, test_result, patient_id, doctor_id, nurse_id)
+    VALUES (Test_seq.NEXTVAL, 'Constipation', 'Small Hemorrhoid', '4', '11', '');
+INSERT INTO Test (test_id, subject, test_result, patient_id, doctor_id, nurse_id)
+    VALUES (Test_seq.NEXTVAL, 'Heart Burn', 'Arrhythmia', '2', '3', '8');
+INSERT INTO Test (test_id, subject, test_result, patient_id, doctor_id, nurse_id)
+    VALUES (Test_seq.NEXTVAL, 'Skin Rash', 'Psoriasis', '12', '5', '14');
+INSERT INTO Test (test_id, subject, test_result, patient_id, doctor_id, nurse_id)
+    VALUES (Test_seq.NEXTVAL, 'Leg Muscle Pain', 'Clear', '6', '15', '13');
+INSERT INTO Test (test_id, subject, test_result, patient_id, doctor_id, nurse_id)
+    VALUES (Test_seq.NEXTVAL, 'Often Tired', 'Clear', '14', '12', '6');
+
+/*
+-- Display all TABLES
+
+SELECT *
+FROM Doctor;
+SELECT *
+FROM Nurse;
+SELECT *
+FROM Patient;
+SELECT *
+FROM Appoinment;
+SELECT *
+FROM Test;
+
+-- Testing Queries
+
+-- Query 1 - This query will select Physician(s) who lives in Atlanta
+SELECT  doctor_id AS "Doctor ID", first_name || ' ' || last_name AS "Doctor Name", city || ', ' || state AS "Location", Specialty AS "Specialize In"
+FROM Doctor
+WHERE city = 'Atlanta' AND specialty = 'Physician'
+ORDER BY 1 ASC;
+
+-- Query 2 - This query will show patient information by using their ID
+SELECT patient_id AS "Patient ID", first_name || ' ' || last_name AS "Patient Name", date_of_birth AS "Birthday",
+street || ', ' || city || ', ' || zip_code AS "Address"
+FROM Patient
+WHERE patient_id LIKE &patient_id
+ORDER BY 1;
+
+-- Query 3 - This query show the top 5 nurses live in Atlanta and Norcross Area
+SELECT nurse_id AS "Nurse ID", first_name || ' ' || last_name AS "Nurse Name", city || ', ' || state || ' ' || zip_code AS "Location"
+FROM Nurse
+WHERE city IN ('Atlanta', 'Norcross')
+ORDER BY nurse_id ASC
+FETCH FIRST 5 ROWS ONLY;
+
+*/
+
+

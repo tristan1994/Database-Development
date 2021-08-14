@@ -1,0 +1,1 @@
+This database consists a small part of a larger dataset of hospital. The ERD shows the relationship between tables and queries shows the most relevant data. 
